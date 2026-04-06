@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pares Mojica</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #f8f8f8;
+    color: #222;
+    position: relative;
+}
+
+/* Faded logo background */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: url('images/logo.jpg') center center no-repeat;
+    background-size: 500px;
+
+    opacity: 0.15; /* increase so you can SEE it */
+    z-index: -1;
+}
+
+/* ================= NAVBAR ================= */
+
+header {
+    background: white;
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.nav-indicator {
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+#nav-links a {
+    z-index: 2;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 28px;
+    font-weight: 500;
+}
+
+.contact-btn {
+    background: #6d5c63;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    height: 90vh;
+    background: url('images/hero.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    color: #ffffff; /* ADD THIS */
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
+
+.hero-content {
+    position: relative;
+    max-width: 700px;
+    z-index: 2; /* ensure above overlay */
+}
+
+.hero h1,
+.hero h2,
+.hero p {
+    color: #ffffff; /* FORCE white */
+}
+
+.hero h1 {
+    font-size: 90px;
+    font-weight: 800;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin: 15px 0;
+    font-weight: 600;
+}
+
+.hero p {
+    margin-bottom: 36px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+.hero-btn {
+    background: #888806;
+    padding: 14px 28px;
+    border-radius: 14px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.hero-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* space between logo and text */
+}
+
+.hero-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ================= MENU SECTION ================= */
+
+.menu-section {
+    padding: 100px 60px;
+    background: #ffffff;
+}
+
+.menu-section h2 {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.menu-section p.subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 60px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+}
+
+.menu-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+.menu-card img {
+    border-bottom: 1px solid #eee;
+}
+
+.menu-content {
+    padding: 25px;
+    position: relative;
+}
+
+.featured {
+    position: absolute;
+    top: -18px;
+    right: 20px;
+    background: #ffd54f;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.menu-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-weight: 700;
+}
+
+.menu-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Blurred sticky navbar */
+
+#nav-links {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    height: 40px; /* ADD THIS */
+}
+
+#nav-links a {
+    position: relative;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    z-index: 2;
+}
+
+/* Moving highlight */
+.nav-indicator {
+    position: absolute;
+    height: 36px;
+    background: #6d5c63;
+    border-radius: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 0;
+
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+/* Active link text color */
+#nav-links a.active {
+    color: white;
+}
+
+
+#navbar {
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.85);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect menu cards */
+.menu-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* Button hover animation */
+.hero-btn, .contact-btn {
+    transition: 0.3s ease;
+}
+
+.hero-btn:hover, .contact-btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hamburger menu */
+.hamburger {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* CONTACT SECTION */
+.contact-section {
+  background: #ffffff;
+  padding: 120px 80px; /* More breathing space */
+}
+
+.contact-section .section-title {
+  margin-bottom: 15px;
+}
+
+.contact-section .section-subtitle {
+  margin-bottom: 60px;
+}
+
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 50px;
+  margin-top: 50px;
+  align-items: start;
+}
+
+.contact-info-card {
+  background: #f4f1f1;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.yellow { background: #f4c542; }
+.blue { background: #1877f2; color: white; }
+.purple { background: #8a63d2; color: white; }
+
+.form-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.form-card input,
+.form-card textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+
+.large-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 14px;
+}
+
+/* FOOTER */
+.footer {
+  background: #1c1414;
+  color: #ddd;
+  padding: 80px 60px 30px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+  color: #f4c542;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.footer-col h4 {
+  margin-bottom: 15px;
+}
+
+.footer-muted {
+  color: #aaa;
+  margin-top: 15px;
+  line-height: 1.6;
+}
+
+.footer-divider {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 30px 0;
+}
+
+.copyright {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+/* HOURS SECTION */
+.hours-section {
+  background: #e9e5e2; /* soft beige like screenshot */
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.hours-section h2 {
+font-size: 60px;
+}
+
+/* Smooth transition */
+.hours-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  text-align: left;
+  padding: 20px;
+  border-radius: 14px;
+  transition: all 0.35s ease;
+}
+
+/* Hover Effect */
+.hours-item:hover {
+  background: #f9f6f6;
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Icon animation */
+.hours-item:hover .hours-icon {
+  transform: scale(1.1);
+}
+
+.hours-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 3px;
+  background: #6d5c63;
+  transition: width 0.3s ease;
+}
+
+.hours-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.hours-item:hover::after {
+  width: 100%;
+}
+
+/* Smooth icon animation */
+.hours-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-right: 25px;
+  transition: transform 0.35s ease;
+}
+
+.hours-section p {
+font-size: 20px;
+}
+
+.hours-wrapper {
+  max-width: 700px;
+  margin: 60px auto 0;
+  background: white;
+  padding: 60px 50px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.hours-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  text-align: left;
+}
+
+.hours-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-right: 25px;
+}
+
+.yellow {
+  background: #f4c542;
+}
+
+.blue {
+  background: #4cc3d9;
+  color: white;
+}
+
+.hours-item h3 {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.hours-item p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Purple Banner */
+.hours-banner {
+  background: #6d5c63;
+  color: white;
+  padding: 18px;
+  border-radius: 12px;
+  font-weight: 500;
+  margin-top: 30px;
+}
+
+.closed-note {
+  margin-top: 35px;
+  color: #666;
+  font-size: 15px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .hours-wrapper {
+    padding: 40px 25px;
+  }
+
+  .hours-item {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .hero-title {
+        flex-direction: column;
+    }
+
+    .hero-logo {
+        width: 70px;
+        height: 70px;
+    }
+  
+}
+
+/* MOBILE FIX */
+@media (max-width: 900px) {
+
+  .contact-container,
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-section {
+  padding: 80px 25px;
+}
+
+}
+
+/* Mobile responsive */
+@media (max-width: 900px) {
+
+    nav {
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        display: none;
+        flex-direction: column;
+    }
+
+    nav a {
+        margin: 10px 0;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 18px 20px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero h2 {
+        font-size: 20px;
+    }
+
+    .menu-section {
+        padding: 60px 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header id="navbar">
+    <div class="logo">Pares Mojica</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        ☰
+    </div>
+
+<nav id="nav-links">
+    <span class="nav-indicator"></span>
+
+    <a href="#menu">Menu</a>
+    <a href="#hours">Hours</a>
+    <a href="#location">Location</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+</nav>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+    <div class="hero-content">
+<div class="hero-title">
+    <img src="images/logo.jpg" class="hero-logo" alt="Logo">
+    <h1>Pares Mojica</h1>
+</div>
+        <h2>Authentic Filipino Beef Pares & Mami</h2>
+        <p>
+            Experience the rich, comforting flavors of traditional Filipino beef pares and mami.
+            Made with love and the finest ingredients.
+        </p>
+        <a href="#menu" class="hero-btn">View Our Menu →</a>
+    </div>
+</section>
+
+<!-- ================= MENU ================= -->
+
+<section id="menu" class="menu-section">
+    <h2>Our Menu</h2>
+    <p class="subtitle">Delicious Filipino comfort food made with love</p>
+
+    <div class="menu-grid">
+
+        <!-- CARD 1 -->
+        <div class="menu-card">
+            <img src="images/beef-pares.png" alt="Beef Pares">
+            <div class="menu-content">
+                <div class="featured">Featured</div>
+                <div class="menu-title">
+                    <span>Beef Pares</span>
+                    <span class="price">₱65.00</span>
+                </div>
+                <div class="menu-description">
+                    Tender braised beef in a sweet-savory sauce, served with garlic fried rice
+                    and beef broth soup.
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="menu-card">
+            <img src="images/beef-mami.png" alt="Beef Mami">
+            <div class="menu-content">
+                <div class="featured">Featured</div>
+                <div class="menu-title">
+                    <span>Beef Mami</span>
+                    <span class="price">₱50.00</span>
+                </div>
+                <div class="menu-description">
+                    Hearty beef noodle soup with tender beef slices, fresh vegetables,
+                    and egg noodles in rich broth.
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</section>
+
+<!-- ================= HOURS ================= -->
+
+<section id="hours" class="hours-section">
+
+    <h2 class="section-title">Store Hours</h2>
+    <p class="section-subtitle">Visit us during our operating hours</p>
+
+    <div class="hours-wrapper">
+
+        <!-- Friday -->
+        <div class="hours-item">
+            <div class="hours-icon yellow">
+                📅
+            </div>
+            <div>
+                <h3>Friday</h3>
+                <p>6:00 PM onwards</p>
+            </div>
+        </div>
+
+        <!-- Weekend -->
+        <div class="hours-item">
+            <div class="hours-icon blue">
+                📅
+            </div>
+            <div>
+                <h3>Saturday & Sunday</h3>
+                <p>12:00 NN onwards (Saturday & Sunday)</p>
+            </div>
+        </div>
+
+        <!-- Timezone Banner -->
+        <div class="hours-banner">
+            🕒 All times in Philippines Time (PHT)
+        </div>
+
+        <p class="closed-note">
+            Closed on Monday - Thursday
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LOCATION ================= -->
+
+<section id="location" style="padding:100px 60px; background:#f8f8f8;">
+    <div style="text-align:center; margin-bottom:60px;">
+        <h2 style="font-size:44px;">Find Us</h2>
+        <p style="color:#777;">Located in the heart of Indang, Cavite</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;">
+
+        <!-- LEFT SIDE -->
+        <div>
+            <!-- Address Card -->
+            <div style="background:#ebe6e6; padding:40px; border-radius:20px; margin-bottom:30px;">
+                <h3 style="margin-bottom:15px;">📍 Address</h3>
+                <p style="margin-bottom:10px;">
+                    Lumampong Halayhay, Indang, Cavite
+                </p>
+                <p style="color:#666; margin-bottom:25px;">
+                    Near Alta Rios Resort Indang
+                </p>
+                <a href="https://maps.app.goo.gl/uNsMzSnA1ZHHvmsYA" style="
+                    display:inline-block;
+                    background:#6d5c63;
+                    color:white;
+                    padding:14px 28px;
+                    border-radius:14px;
+                    text-decoration:none;
+                    font-weight:600;" target="_blank" rel="noopener" class="btn-primary">Get Directions
+                </a>
+
+            </div>
+
+            <!-- Easy to Find -->
+            <div style="
+                background:#f4c542;
+                padding:30px;
+                border-radius:20px;">
+                <h3 style="margin-bottom:10px;">Easy to Find</h3>
+                <p>
+                    We're located near Alta Rios Resort in Indang, Cavite.
+                    Look for our signage along the main road in Lumampong Halayhay.
+                </p>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE MAP -->
+        <div style="border-radius:20px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.1);">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d967.1178419580069!2d120.86029726953745!3d14.167147699141845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTTCsDEwJzAxLjciTiAxMjDCsDUxJzM5LjQiRQ!5e0!3m2!1sen!2sph!4v1771327126820!5m2!1sen!2sph"
+                width="100%" 
+                height="450" 
+                style="border:0;"
+                loading="lazy">
+            </iframe>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= GALLERY ================= -->
+
+<section id="gallery" style="padding:100px 60px; background:#f8f8f8; text-align:center;">
+    <h2 style="font-size:40px; margin-bottom:10px;">Gallery</h2>
+    <p style="color:#777; margin-bottom:50px;">A glimpse of our delicious offerings</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; max-width:1100px; margin:auto;">
+        
+        <img src="images/pares1.png" style="width:100%; height:250px; object-fit:cover; border-radius:18px;">
+        <img src="images/beef-pares.png" style="width:100%; height:250px; object-fit:cover; border-radius:18px;">
+        <img src="images/beef-mami.png" style="width:100%; height:250px; object-fit:cover; border-radius:18px;">
+        <img src="images/beef-mami2.jpg" style="width:100%; height:250px; object-fit:cover; border-radius:18px;">
+
+    </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact" class="section contact-section">
+
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+
+    <div class="contact-container">
+
+        <!-- LEFT INFO -->
+        <div class="contact-info-card">
+
+            <div class="info-item">
+                <div class="icon yellow">📞</div>
+                <div>
+                    <h4>Phone</h4>
+                    <p>0930 173 7377</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon blue">📘</div>
+                <div>
+                    <h4>Facebook</h4>
+                    <p><a href="https://www.facebook.com/paresmojica">facebook.com/paresmojica</a></p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon purple">✉</div>
+                <div>
+                    <h4>Email</h4>
+                    <p>paresmojica@example.com</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT FORM -->
+        <div class="form-card">
+            <form action="https://formsubmit.co/jayceemoji@gmail.com" method="POST" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="text" name="phone" placeholder="Phone">
+            <textarea name="message" placeholder="Your Message" required></textarea>
+
+                <button type="submit" class="btn-primary large-btn">
+                    Send Message ✈
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h3 class="footer-logo">Pares Mojica</h3>
+            <p>Authentic Filipino Beef Pares & Mami</p>
+            <p class="footer-muted">
+                Experience the rich, comforting flavors of traditional Filipino
+                beef pares and mami. Made with love and the finest ingredients.
+            </p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <p>📞 0930 173 7377</p>
+            <p>📘<a href="https://www.facebook.com/paresmojica">facebook.com/Pares Mojica</a></p>
+            <p>✉ paresmojica@example.com</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Visit Us</h4>
+            <p>Lumampong Halayhay, Indang, Cavite</p>
+            <p>Near Alta Rios Resort Indang</p>
+            <p>Friday: 6:00 PM onwards</p>
+            <p>12:00 NN onwards (Sat & Sun)</p>
+        </div>
+
+    </div>
+
+    <hr class="footer-divider">
+
+    <p class="copyright">
+        © 2026 Pares Mojica. All rights reserved.
+    </p>
+
+</footer>
+
+
+<script>
+function toggleMenu() {
+const nav = document.querySelector("#nav-links");
+  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+}
+
+/* Scroll animation */
+const elements = document.querySelectorAll(".fade-in");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+});
+
+elements.forEach(el => {
+  el.style.opacity = 0;
+  el.style.transform = "translateY(40px)";
+  observer.observe(el);
+});
+
+</script>
+
+<script>
+
+    const links = document.querySelectorAll("#nav-links a");
+const indicator = document.querySelector(".nav-indicator");
+
+function moveIndicator(element) {
+    if (!element) return;
+
+    const rect = element.getBoundingClientRect();
+    const parentRect = element.parentElement.getBoundingClientRect();
+
+    if (rect.width === 0) return; // prevent bug when hidden
+
+    indicator.style.width = rect.width + "px";
+    indicator.style.left = (rect.left - parentRect.left) + "px";
+}
+
+// Click event
+let isClicking = false;
+
+links.forEach(link => {
+    link.addEventListener("click", () => {
+        isClicking = true;
+
+        links.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+        moveIndicator(link);
+
+        // Allow scroll detection again after animation
+        setTimeout(() => {
+            isClicking = false;
+        }, 700); // match smooth scroll timing
+    });
+});
+
+// Set default on load
+window.addEventListener("DOMContentLoaded", () => {
+    const first = document.querySelector("#nav-links a");
+    if (first) {
+        first.classList.add("active");
+        moveIndicator(first);
+    }
+});
+</script>
+
+<script>
+
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+    if (isClicking) return; // 🚫 STOP conflict
+
+    let current = "";
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (scrollY >= sectionTop) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    links.forEach(link => {
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+            moveIndicator(link);
+        }
+    });
+});
+</script>
+</body>
+</html>
